@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES2015</title>
+    <link rel="stylesheet" href="https://unpkg.com/jasmine-core@4.1.0/lib/jasmine-core/jasmine.css" />
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <h1>ES2015</h1>
+    <hr><hr>
+
+    <section id="history">
+        <h2>A Brief History</h2>
+    </section>
+    <hr>
+
+    <section id="vars">
+        <h2>Let and Const</h2>
+        <p></p>
+        <button>array =</button>
+        <input type="text" name="vars-answer" class="answer" readonly>
+    </section>
+    <hr>
+    <section id="let">
+        <h3>Let</h3>
+        <p></p>
+        <button>Double Values</button>
+        <button>Add Values</button>
+    </section>
+    <hr>
+    <section id="const">
+        <h3>Const</h3>
+        <div class="input"><p></p> <input type="num" max="99"></div>
+        <div>
+            <input type="text" name="add" placeholder="sums" class="answer" readonly><button>Add</button>
+            <input type="text" name="add" placeholder="difference" class="answer" readonly><button>Subtract</button><br>
+            <input type="text" name="add" placeholder="product" class="answer" readonly><button>Multiply</button>
+            <input type="text" name="add" placeholder="quotient" class="answer" readonly><button>Divide</button>
+        </div>
+    </section>
+    <hr>
+    <hr>
+
+    <script src="https://unpkg.com/jasmine-core@4.1.0/lib/jasmine-core/jasmine.js"></script>
+    <script src="https://unpkg.com/jasmine-core@4.1.0/lib/jasmine-core/jasmine-html.js"></script>
+    <script src="https://unpkg.com/jasmine-core@4.1.0/lib/jasmine-core/boot0.js"></script>
+    <script src="https://unpkg.com/jasmine-core@4.1.0/lib/jasmine-core/boot1.js"></script>
+
+    <script src="vars.js"></script>
+    <script src="vars.test.js"></script>
+    <script src="app.js"></script>
+    <script src="app.test.js"></script>
+</body>
+</html>

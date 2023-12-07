@@ -1,0 +1,25 @@
+#vars .answer{
+    text-align: center;
+    cursor: not-allowed;
+}
+
+#const .arr-enter{
+    width: 3em;
+}
+#const .answer{
+    width: 35vw;
+    text-align: center;
+    cursor: not-allowed;
+}
+#const button{
+    width: 10vw;
+}
+#const .input{
+    display: flex;
+    align-items: center;
+}
+#const .input input{
+    margin-left: 2vw;
+    height: 1em;
+    width: 2em;
+}
