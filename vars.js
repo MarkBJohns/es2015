@@ -80,3 +80,17 @@ divideBtn.addEventListener('click',function(){
         divideAnswer.value=JSON.stringify(quotient);
     }
 })
+// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+const nameForm=document.querySelector('#fat-arrow form');
+const nameAnswer=document.querySelector('#fat-arrow .answer');
+const nameArr=[];
+const addNames=(newName)=>({name:newName});
+
+nameForm.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    const inputName=nameForm.querySelector('input[name="Names"]').value;
+    const resultObj=addNames(inputName);
+    nameArr.push(resultObj);
+    nameAnswer.value=JSON.stringify(nameArr);
+    nameForm.reset();
+})

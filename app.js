@@ -188,3 +188,107 @@ const testArrayResult=multiplyThirdIndex(testArray);
 //      In the function, you can see "const thirdIndex=arr[2]". However, if you enter thirdIndex 
 //      directly into the console, you'll get an error because thirdIndex is not defined outside of
 //      the scope of multiplyThirdIndex().
+
+// ----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
+
+//                                          ARROW FUNCTIONS
+
+// --------------------------------------------------------------
+
+// A convenient shorthand for functions is the "fat arrow" syntax. Take a simple doubling function
+//      using the map() method. Usually, you would write is like this:
+
+function doublingFunct(arr){
+    return arr.map(function(val){
+        return val*2;
+    })
+}
+
+//      For the second line, after 'map', you have to specify which function you want to run for each
+//      value by writing out "function(val)". But there's a shorter way to write it using the fat 
+//      arrow syntax:
+
+function doublingFatArrow(arr){
+    return arr.map((val)=>{
+        return val*2;
+    })
+}
+
+//      These are both identical in their functions, despite the syntax difference. For the double
+//      arrow, rather than stating "function" followed by the argument, you specify the argument 
+//      followed by a fat arrow (=>).
+
+// In addition to removing the need to type "function", you can also use the arrow to keep simple
+//      code on one line.
+
+const doubledNums=numberArray.map(val => val*2);
+
+//      Here you take numberArray, use the map method, assign 'val' as the parameter, and multiply
+//      each val by 2. Because it's all one one line, the 'return' is implied and does not need to
+//      be typed out. Keep in mind that this only works for simple code that fits on one line, as if
+//      you need to expand your code to multiple lines, you will still have to type 'return'.
+
+// You can even fit conditionals on one line, so long as the function only has one parameter.
+
+function isEvenOrOdd(arr){
+    return arr.map((val)=>{
+        if(val%2===0){
+            return 'even';
+        } return 'odd';
+    })
+}
+
+//      While the fat arrow shortened this function a bit, you can shorten it even more to only take
+//      up one line by using the ? and : methods.
+
+const evenOrOddONeLine=numberArray.map((val)=>(val%2===0?'even':'odd'));
+
+// --------------------------------------------------------------
+
+// Keep in mind that fat arrow functions cannot be named, as they are just shorthand for anonymous
+//      callback functions. In doublingFunct() and doublingFatArrow(), the second line is an anoymous
+//      callback function, and doesn't need to be named, which is why the fat arrow syntax is usable
+//      there.
+
+// --------------------------------------------------------------
+
+//      FAT ARROW OBJECTS
+
+// --------------------------------------------------------------
+
+// If you want to create objects with a fat arrow function, you need to be sure to add parentheses 
+//      around the object you want to create:
+
+const addPokemon=(species)=>({name:species});
+
+//      Now if you enter "addPokemon('PokemonName')" to the console, it will return an object with
+//      "name" and the species you entered.
+
+// ----------------------------------------------------------------------------------------------------------------
+
+//      THIS
+
+// --------------------------------------------------------------
+
+//  The keyword "this" used in functions is a reference to the object that called the function.
+
+const nameObj={
+    name:       'Mark',
+    mood:       'well',
+    sayHello:   function(){
+        console.log('Hello, '+this.name);
+    },
+    askMood:    function(){
+        console.log('Are you feeling '+this.mood+'?');
+    }
+}
+
+//      For instance, in the console, if you enter "nameObj.sayHello()", it will return "Hello, Mark",
+//      and if you enter "nameObj.askMood()", it will return "Are you feeling well?". The reason it
+//      can log the specific values is because the "this" keyword will refer to the object it's 
+//      attached to, in this case "nameObj".
+
+// It's important to note that you shouldn't use arrow functions inside of an object, because arrow
+//      functions don't have their own "this" context. Arrow functions will inherit the "this" of 
+//      whatever it's attached to rather than generating their own.
