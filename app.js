@@ -244,6 +244,14 @@ function isEvenOrOdd(arr){
 
 const evenOrOddONeLine=numberArray.map((val)=>(val%2===0?'even':'odd'));
 
+//      The ? automatically sets up a conditional, and the : separates the return for a "true" 
+//      outcome on the left and a "false" outcome on the right. Using this method you can take a 
+//      function that previously took 6 lines and reduce it to one.
+
+// The arrow functions work because it uses something called an 'implicit return'. However, it's only
+//      implicit if it's on one line. If your function is too long for a single line, be sure to
+//      type 'return' even if you use the arrow method.
+
 // --------------------------------------------------------------
 
 // Keep in mind that fat arrow functions cannot be named, as they are just shorthand for anonymous
@@ -292,3 +300,149 @@ const nameObj={
 // It's important to note that you shouldn't use arrow functions inside of an object, because arrow
 //      functions don't have their own "this" context. Arrow functions will inherit the "this" of 
 //      whatever it's attached to rather than generating their own.
+
+// ----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
+
+//                                          REST AND SPREAD
+
+// ----------------------------------------------------------------------------------------------------------------
+
+//      ARGUMENTS
+
+// --------------------------------------------------------------
+
+// When a function is created, you get access to a keyword called 'arguments'. In the context of a
+//      function, arguments are treated like an array. Keep in mind, arguments cannot be passed in
+//      arrow functions, which is why they aren't being used in these examples.
+
+function logArguments(){
+    console.log(`You have ${arguments.length} arguments, starting with ${arguments[0]}`);
+}
+
+//      If you enter "logArguments(1,2,3,4,5)" into the console, it will return "You have 5 arguments,
+//      starting with 1", because it treats 1,2,3,4,5 like an array, allowing you to index elements
+//      and use methods like "length".
+
+// However, while the arguments are treated like an array, they are not actually an array, so methods
+//      like map(), filter(), etc, are not accessible for the arguments.
+
+function doubleArguments(){
+    return arguments.map((arg)=>{
+        return arg*2;
+    })
+}
+
+//      If you try to enter "doubleArguments(1,2,3,4,5)", it will return an error. The old way to get
+//      around this limitation was to convert the arguments into an actual array:
+
+function doubleArguments2(){
+    const argArr=Array.from(arguments);
+    return argArr.map((arg)=>{
+        return arg*2;
+    })
+}
+
+//      Which allows us to use the array methods our argument array-like-object. But now there's a
+//      shorthand you can use to do the same thing in fewer steps.
+
+// ----------------------------------------------------------------------------------------------------------------
+
+//      REST
+
+// --------------------------------------------------------------
+
+// You can add ... to your argument list, which will create the 'rest' operator. This is defined last
+//      and will evaluate to an array all of the additional arguments passed in.
+
+function addAll(...nums){
+    return nums.reduce((a,b)=>a+b,0);
+}
+
+//      In addAll(), the 'nums' will refer to the final argument given, and the ... ('rest') will
+//      refer to every argument before it. The benefit here is that 'rest' will convert every 
+//      argument into an actual array. For instance, addAll(1,2,3,4) converts the arguments into
+//      an array called 'nums' equal to [1,2,3,4], allowing the reduce() method to be used, making
+//      addAll(1,2,3,4)=10.
+
+// You can also use 'rest' to specify certain arguments while still collecting the rest.
+
+function findTheFirst(first,...more){
+    console.log(`The first argument is ${first}`);
+    more.forEach((arg)=>{
+        console.log(arg);
+    })
+}
+
+//      Now when we run a list of arguments, the first argument will be returned directly. But we
+//      still have the remaining arguments listed as well, because we were able to convert them to
+//      the 'more' array and run forEach() on it.
+
+// ----------------------------------------------------------------------------------------------------------------
+
+//      SPREAD
+
+// --------------------------------------------------------------
+
+//  In a different context, the ... operator will be 'spread' rather than 'rest'. Take the addAll()
+//      function from earlier, any arguments you put in are converted into an array, and that array
+//      has the reduce() method applied. But what if we have an array already that we want to add?
+
+// Enter "addAll(numberArray)" into the console, and it will return "01,2,3,4,5,6,7,8,9,10". This is
+//      because the array itself is only one argument, and adding a number to an array just puts the
+//      0 accumulator in front of the array. If you want to actually add the values inside your array,
+//      you can use the 'spread' operator.
+
+// Now enter "addAll(...numberArray)" into the console, and it will return "55". This is because the
+//      array was 'spread' out into individual elements before the reduce() method is run.
+
+// This is also useful for basic functions like Math.max() that won't accept arrays, as
+//      Math.max(numberArray) returns "NaN", while Math.max(...numberArray) will return "10".
+
+// --------------------------------------------------------------
+
+// You can also use 'spread' to add arrays into other arrays:
+
+const starterMons=['Bulbasaur','Charmander','Squirtle'];
+
+//      Say you already have a team with Pidgey, Butterfree, and Pikachu, and want to add the starter
+//      Pokemon to your team. If you try to add 'startMons' to your team, it can create some issues:
+
+const newTeam=['Pidgey','Butterfree','Pikachu',starterMons];
+
+//      Enter newTeam into the console, and it you'll run into problem, where your newTeam array has
+//      the startMons array nested inside, rather than one new array with 6 Pokemon. Instead, you can
+//      use 'spread' to make it one new array.
+
+const newTeamFixed=['Pidgey','Butterfree','Pikachu',...starterMons];
+
+//      Now newTeamFixed is one array with 6 elements.
+
+// --------------------------------------------------------------
+
+// You can also use 'spread' to create new versions of objects:
+
+const Absol={
+    ability:    'N/A',
+    moves:      [],
+    item:       'N/A'
+};
+
+//      If you know you want to use an Absol but you aren't sure what competitive aspects you want
+//      to use, you can create different versions of the Absol object that fills in certain gaps.
+
+const critAbsol={...Absol,ability:'Super Luck'};
+
+//      If you want an Absol that relies on high critical hit chances, you can give him the ability
+//      Super Luck using 'spread'. You spread the values for the original Absol object, and specify
+//      the one value you want to change. Now if you enter "critAbsol" into the console, the ability
+//      is updated without changing anything else. This is useful to play around with more specific
+//      versions of the objects.
+
+const critLifeOrbAbsol={...critAbsol,item:'Life Orb'};
+const critLumAbsol={...critAbsol,item:'Lum Berry'};
+
+const SwordDanceSet=['Swords Dance','Sucker Punch','Superpower','Night Slash'];
+const critLumSDAbsol={...critLumAbsol,moves:SwordDanceSet};
+
+//      etc, etc.
