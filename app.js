@@ -910,8 +910,7 @@ Flareon=idiotValue;
 //      ... and finally Flareon the fire value.
 
 // The issue here is that this can be time consuming if it needs to be done too often, as well as the
-//      extra unused value to now have floating around. Instead, you can use destructuring to swap
-//      values.
+//      extra unused value to now have floating around.
 
 // --------------------------------------------------------------
 
@@ -927,4 +926,32 @@ let Leafeon={
 // Instead of a third variable, we can just put the two objects in an array...
 
 let swapped=[Glaceon,Leafeon];
+
+//      ... and then write the function backwards. Rewrite the array in a different order, then 
+//      equate it to the swapped variable.
+
 [Leafeon,Glaceon]=swapped;
+
+//      Now entering Leafeon and Glaceon in the console will return the correct data.
+
+// This is faster, but the issue of having a third variable is still present. The most optimal way to
+//      resolve this is with destructuring.
+
+// --------------------------------------------------------------
+
+let roses='are blue';
+let violets='are red';
+
+// The destructuring solution is actually the easiest of them all. Rather than creating new values,
+//      all you have to do is put them in an anonymous array, and equate it to another anonymous
+//      array while reversing the order.
+
+[roses,violets]=[violets,roses];
+
+//      Now, roses 'are red' and violets 'are blue' in one line of code with no unnecessary variables
+//      to worry about.
+
+const numberOne='two';
+const numberTwo='one';
+
+[numberOne,numberTwo]=[numberTwo,numberOne];
