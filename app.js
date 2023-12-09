@@ -594,3 +594,337 @@ function addColorSH(name,hex){
 }
 
 const picanteSH=addColorSH('Picante','8d3f2d');
+
+// ----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
+
+//                                          DESTRUCTURING
+
+// ----------------------------------------------------------------------------------------------------------------
+
+//      OBJECT DESTRUCTURING
+
+// --------------------------------------------------------------
+
+// Say you want to extract different types of data from an object.
+
+const userOneData={
+    username:   'Pepto',
+    id:         '42069',
+    password:   'Changelater01!',
+    firstName:  'Mark',
+    lastName:   'Johns',
+    age:        '28'
+}
+
+//      Previously, it was a long process of having to declare variables for each individual key:
+
+// const userOneUsername=userOneData.username;
+// const useOnePassword=userOneData.password;
+// const userOneFirstName=userOneData.firstName;
+
+//          etc, etc.
+
+// But instead of having to declare a variable for every key in the object, we can destructure the
+//      object to find multiple variables at once.
+
+const userTwoData={
+    username:   'Pepto',
+    id:         '42069',
+    password:   'Changelater01!',
+    firstName:  'Mark',
+    lastName:   'Johns',
+    age:        '28'
+}
+
+let {username,id,password,firstName,lastName,age}=userTwoData;
+
+//      Now instead of having to declare all of the variables, we can access everything with
+//      userTwoData.password, userTwoData.age, userTwoData.username, etc. 
+
+// ----------------------------------------------------------------------------------------------------------------
+
+//      RENAMING
+
+// --------------------------------------------------------------
+
+// You can also use destructuring to rename the keys in your object. Say you've been using a ton of
+//      shorthand and abbreviations that the rest of your team doesn't understand.
+
+const Arcanine={
+    nn:     'Archie',
+    ab:     'Intimidate',
+    it:     'White Herb',
+    m1:     'Roar',
+    m2:     'Overheat',
+    m3:     'Hidden Power Grass',
+    m4:     'ExtremeSpeed'
+}
+
+//      Once the data is entered, you can convert the keys from abbreviations to the full words 
+//      everyone else can understand.
+
+const {nn:nickName,ab:abilty,it:item,m1:moveOne,m2:moveTwo,m3:moveThree,m4:moveFour}=Arcanine;
+
+//      Now each of these elements are only saved as a variable, but the variables have been renamed.
+
+// ----------------------------------------------------------------------------------------------------------------
+
+//      DESTRUCTURING SPREAD
+
+// --------------------------------------------------------------
+
+// You can use the spread operator along with destructuring to create modified copies.
+
+const colorOptions={
+    favorite:   'Orange',
+    second:     'Blue',
+    okay:       'Green',
+    dislike:    'Purple',
+    hate:       'Yellow'
+}
+
+//      If you only want to extract the colors you like, you can destructure colorOptions by 
+//      specifying the keys you don't want to return, and creating a variable for the remaining 
+//      keys.
+
+const {dislike,hate,...bestColors}=colorOptions;
+
+//      Now if you enter bestColors into the console, it will return an object with only the
+//      'favorite', 'second', and 'okay' key/value pairs.
+
+// ----------------------------------------------------------------------------------------------------------------
+
+//      DEFAULT VALUES
+
+// --------------------------------------------------------------
+
+// You can also use destructuring to add a default value to an object if it's not present in the 
+//      object itself.
+
+const inventory={
+    water:  '6 bottles',
+    gloves: '2 pairs',
+    jeans:  '4 pairs',
+    jerky:  '7 bags'
+}
+
+//      Say the store has a great deal with a clothing distributer where they can get any hats they
+//      want shipped to the store overnight. Rather than having a constantly changing amount of hats
+//      in the inventory, you can assign a default value.
+
+const {hats='order from Hat Co'}=inventory;
+
+// If you check inventory directly, you won't see any hats, but if you enter "hats" into the console,
+//     it will tell you to order from Hat Co.
+
+// ----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
+
+//      ARRAY DESTRUCTURING
+
+// --------------------------------------------------------------
+
+// Arrays can be destructured as well, but given that they don't have keys, they are called via their
+//      index rather than the key.
+
+const hoennStarters=[
+    {name:  'Treecko',
+     type:  'Grass'},
+    {name:  'Torchic',
+     type:  'Fire'},
+    {name:  'Mudkip',
+     type:  'Water'},
+];
+
+const [grass,fire,water]=hoennStarters;
+
+//      Now 'grass', 'fire', and 'water' are variables with the first, second, and third indexes of
+//      hoennStarters as their values. You can use whatever names you want for the variables, as the
+//      first variable will apply to the first index, the second name to the second index, etc.
+
+const [one,two,three]=hoennStarters;
+const [completely,random,names]=hoennStarters;
+
+// --------------------------------------------------------------
+
+// You can also skip indexes by using a comma, or group other indexes together with 'rest'.
+
+const grassStarters=[
+    {name:  'Bulbasaur',
+     type:  'Grass/Poison'},
+    {name:  'Chikorita',
+     type:  'Grass'},
+    {name:  'Snivy',
+     type:  'Grass'},
+    {name:  'Treecko',
+     type:  'Grass'},
+    {name:  'Grookey',
+     type:  'Grass'},
+];
+
+const [theOG, , whack,...theBest]=grassStarters;
+
+// Now Bulbasaur is given a variable name 'theOG', Snivy is 'whack', Treecko and Grookey share an 
+//      array called 'theBest' (because they are), and Chikorita isn't given its own name because 
+//      you didn't even remember it exists until I brought it up.
+
+// ----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
+
+//      FUNCTION DESTRUCTURING
+
+// --------------------------------------------------------------
+
+// You can also destructure specific keys from objects to run functions on them. 
+
+const order533={
+    product:    'Root Beer',
+    brand:      'A&W',
+    price:      7.99,
+    quantity:   3
+};
+
+//      If we want to run a function to see how much each order costs, you can write it in a way that
+//      only extracts the relevant data. For example, the name and brand doesn't change how much the
+//      order costs, so we don't need it.
+
+function getPriceTotal({price,quantity}){
+    return `$${quantity*price}`
+}
+
+// Now if you run getPriceTotal(order533), it will return "$23.97", the value of 7.99*3. "Product"
+//      and "brand" are ignored because they aren't specified in the arguments.
+
+// --------------------------------------------------------------
+
+// You can also create object by destructuring arrays:
+
+const sinnohStarters=['Turtwig','Chimchar','Piplup'];
+
+function addStarterTypes([Grass,Fire,Water]){
+    return {
+        Grass,
+        Fire,
+        Water
+    }
+}
+
+//      Entering addStarterTypes(sinnohStarters) into the console will return {Grass:'Turtwig', Fire:
+//      'Chimchar', Water:'Piplup}.
+
+// ----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
+
+//      NESTED DESTRUCTURING
+
+// --------------------------------------------------------------
+
+// You can destructure arrays and objects nested inside objects as well.
+
+const stallUmbreon={
+    ability:    'Synchronize',
+    item:       'Leftovers',
+    nature:     'Calm',
+    EVs:        {HP:   252,
+                  SpD:  252,
+                  Def:  4},
+    moveset:    ['Wish',
+                 'Protect',
+                 'Heal Bell',
+                 'Foul Play']
+};
+
+// If you wanted to get the EV count for Umbreon's Special Defense stat, it's in an object nested 
+//      inside another object, and thus isn't accessible the normal way.
+
+const {EVs}=stallUmbreon;
+//      Will return the full object rather than the specific stat that we want.
+
+const {EVs:{SpD:specialDefense}}=stallUmbreon;
+//      Now 'specialDefense' is a variable, set to 252.
+
+// --------------------------------------------------------------
+
+// You can also do this for arrays, as we'll see with 'moveset'.
+
+const {moveset:[firstMove,secondMove,thirdMove,fourthMove]}=stallUmbreon;
+//      Now firstMove='Wish', secondMove='Protect', and so on.
+
+// --------------------------------------------------------------
+
+const hpUmbreon={
+    ability:    'Synchronize',
+    item:       'Leftovers',
+    nature:     'Calm',
+    EVs:        {HP:   252,
+                  SpD:  252,
+                  Def:  4},
+    moveset:    ['Wish',
+                 'Protect',
+                 'Heal Bell',
+                 {'Hidden Power':'Flying'}]
+};
+
+// You can get even deeper through nesting such as finding out what type Hidden Power is on this 
+//      suboptimal coverage Umbreon is.
+
+const {moveset:[, , ,{'Hidden Power':hpType}]}=hpUmbreon;
+//      This abomination takes the array for "moveset", skips the first three indexes with commas,
+//      destructures the Hidden Power object to get the key, and renames it 'hpType', giving you a
+//      hpType='Flying'.
+
+// ----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
+
+//      DESTRUCTURING SWAP
+
+// --------------------------------------------------------------
+
+// Sometimes values can accidentally be assigned to the wrong variables, and it can be difficult to
+//      correct them.
+
+let Jolteon={
+    type:       'Fire',
+    evolution:  'Fire Stone'
+}
+
+let Flareon={
+    type:       'Electric',
+    evolution:  'Thunder Stone'
+}
+
+//      Trying to reassign Jolteon=Flareon and Flareon=Jolteon would be counterproductive, so it used
+//      to require a temporary third variable:
+
+let idiotValue=Jolteon;
+
+//      We give idiotValue the fire value of Jolteon...
+
+Jolteon=Flareon;
+
+//      ... then Jolteon the electric value...
+
+Flareon=idiotValue;
+
+//      ... and finally Flareon the fire value.
+
+// The issue here is that this can be time consuming if it needs to be done too often, as well as the
+//      extra unused value to now have floating around. Instead, you can use destructuring to swap
+//      values.
+
+// --------------------------------------------------------------
+
+let Glaceon={
+    type:       'Grass',
+    evolution:  'Moss-covered Rock'
+}
+let Leafeon={
+    type:       'Ice',
+    evolution:  'Ice-covered Rock'
+}
+
+// Instead of a third variable, we can just put the two objects in an array...
+
+let swapped=[Glaceon,Leafeon];
+[Leafeon,Glaceon]=swapped;
