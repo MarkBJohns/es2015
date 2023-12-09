@@ -954,4 +954,7 @@ let violets='are red';
 const numberOne='two';
 const numberTwo='one';
 
-[numberOne,numberTwo]=[numberTwo,numberOne];
+//      Note that is only works with 'let' or 'var' variables, as once a 'const' variable is declared
+//      they cannot be reassigned, and the code below would return an error message if un-commented.
+
+// [numberOne,numberTwo]=[numberTwo,numberOne];
