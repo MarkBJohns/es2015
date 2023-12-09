@@ -446,3 +446,151 @@ const SwordDanceSet=['Swords Dance','Sucker Punch','Superpower','Night Slash'];
 const critLumSDAbsol={...critLumAbsol,moves:SwordDanceSet};
 
 //      etc, etc.
+
+// ----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
+
+//      OBJECT ENHANCEMENTS
+
+// --------------------------------------------------------------
+
+// Say you wanted to create an array of certain people you needed to keep track of for classified
+//      deep state reasons.
+
+const secretList=[];
+
+//      For each person, there are multiple important data points, so it makes the most sense to save
+//      them as an object. The old way to do this was to create a function that takes in multiple
+//      parameters and converts them into an object.
+
+function addPerson(firstName,lastName,age,isAlive){
+    return {
+        firstName:  firstName,
+        lastName:   lastName,
+        age:        age,
+        isAlive:    isAlive
+    }
+};
+
+const markJohns=addPerson('Mark','Johns',28,true);
+
+secretList.push(markJohns);
+
+//      Now I've been added to this watchlist, and the government can pull up instantly my full name,
+//      age, and whether I'm still dangerous.
+
+// But you can see that the keys in the object and the argument variables are the same, so there's a
+//      faster way to write this code:
+
+function addPersonSH(firstName,lastName,age,isAlive){
+    return {
+        firstName,
+        lastName,
+        age,
+        isAlive
+    }
+}
+
+const alias=addPersonSH('John','Doe',32,true);
+
+secretList.push(alias);
+
+//      You can check secretList and see that both me and my extremely covert secret identity made it
+//      on the list, and the object format looks the same. When the key name is the same as the 
+//      argument name, you only have to write that key and a comma, and the function will
+//      automatically create a key/value pair with that key and your value.
+
+// This is one of the many shorthand methods for coding objects.
+
+// ----------------------------------------------------------------------------------------------------------------
+
+//      SHORTHAND METHODS
+
+// --------------------------------------------------------------
+
+// Sometimes functions are inside objects, like this greeting object:
+
+const greeting={
+    single: function(a){
+        return `Hello, ${a}`;
+    },
+    double: function(a,b){
+        return `Hello, ${a} and ${b}`;
+    },
+    triple: function(a,b,c){
+        return `Hello, ${a}, ${b}, and ${c}`;
+    }
+}
+
+//      Here we can have a preset greeting for up to three people by specifying "object.key":
+
+const helloMark=greeting.single('Mark');
+const helloMarkJohn=greeting.double('Mark','John');
+const helloMarkJohnTim=greeting.triple('Mark','John','Tim');
+
+//      However, we don't need to specify the key, and can just name the function within the object:
+
+const greetingSH={
+    single(a){
+        return `Hello, ${a}`;
+    },
+    double(a,b){
+        return `Hello, ${a} and ${b}`;
+    },
+    triple(a,b,c){
+        return `Hello, ${a}, ${b}, and ${c}`;
+    }
+}
+
+// ----------------------------------------------------------------------------------------------------------------
+
+//      COMPUTED PROPERTY NAMES
+
+// --------------------------------------------------------------
+
+// Say you're creating a color library for graphic design, and you want to be able to get a color
+//      name from a hexcode and vice versa.
+
+const colorExample={
+    'name':     'hex',
+    'hex':      'name'
+}
+
+function addColor(name,hex){
+    return {
+        name:   hex,
+        hex:    name
+    }
+}
+
+//      Now for every color you want to add, you have a function that just needs those parameters.
+
+const picante=addColor('Picante','8d3f2d');
+
+// But this isn't quite what we want, because it will return "{name: '8d3f2d',key:'picante'}". In
+//      addition not chaning the key names like we want, it also places the 'name' information with
+//      the 'hex' key and the 'hex' information with the 'name' key.
+
+// The old solution was to create variables, which ended up being a confusing mess of repeated terms:
+
+function addColorOld(name,hex){
+    const color={};
+    color[name]=hex;
+    color[hex]=name;
+    return color;
+}
+
+
+const picanteOld=addColorOld('Picante','8d3f2d');
+
+// The faster shorhand version of this is to just retun an object with braces determining the key
+//      names:
+
+function addColorSH(name,hex){
+    return {
+        [name]: hex,
+        [hex]:  name
+    }
+}
+
+const picanteSH=addColorSH('Picante','8d3f2d');
