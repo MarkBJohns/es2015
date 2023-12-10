@@ -958,3 +958,147 @@ const numberTwo='one';
 //      they cannot be reassigned, and the code below would return an error message if un-commented.
 
 // [numberOne,numberTwo]=[numberTwo,numberOne];
+
+// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+//                                             MAPS AND SETS
+
+// ----------------------------------------------------------------------------------------------------------------
+
+//      DATA STRUCTURES
+
+// --------------------------------------------------------------
+
+// The way we set up collections of data are called "structures". The one's we've been using up until this 
+//      point are arrays and objects. Two relatively recent structure additions are 'maps' and 'sets'. 
+
+// ----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
+
+//      MAPS
+
+// --------------------------------------------------------------
+
+// Most similar to objects, maps are data structures with key/value pairs, but the keys can be any type of
+//      data, and it's easier to iterate through maps than objects.
+
+const myObj={};
+const key={};
+
+// If you go to the console and enter "myObj[1]='one'", you'll add a key/value pair of {'1':'one'}, and if
+//      you enter "myObj[key]='key'", it will return that key/value pair as {[object Object]:'key'}, in both
+//      cases because anything made into an object key is converted into a string.
+
+// --------------------------------------------------------------
+
+// Unlike arrays and objects with a literal syntax (as soon as you type [] or {} the data is automatically
+//      read as an array or object), maps have to be declared specifically with the 'new' keyword.
+
+const myMap=new Map();
+
+//      Now there's an empty map called myMap, but to add content, we can't just declare a key value like 
+//      we did for myObj above. Instead we need a method called 'set()'.
+
+myMap.set(1,'one');
+
+//      Rather than the {'1':'one'} that would return in an object, the map key/value pair returns 
+//      {1 => 'one'}.
+
+//      You also can't retrieve the keys just be declaring them like you would for an object, you have to use
+//      the 'get()' method: myMap.get(1)='one'.
+
+// In addition to various data types, you can set functions as map keys.
+
+                                const tracker=new Map();
+//                              const earnings=(x,y)=>x+y;
+//                              const spending=(x,y)=>x-y;
+//                              tracker.set(earnings,0);
+//                              tracker.set(spending,0);
+
+//      Say a company wants to track their earnings vs spending, so they want to keep track of every time
+//      the add function is used vs the subtract function. You can put both of those functions as keys into a
+//      map and give them a counter of 0.
+
+
+//      You can update the functions to reference the values in 'tracker' and update them.
+
+const earnings=(x,y)=>{
+    const crntVal=tracker.get(earnings)||0;
+    tracker.set(earnings,crntVal+1);
+    return x+y;
+}
+tracker.set(earnings,0);
+
+const spending=(x,y)=>{
+    const crntVal=tracker.get(spending)||0;
+    tracker.set(spending,crntVal+1);
+    return x-y;
+}
+tracker.set(spending,0);
+
+//      While still possible to do this in an object, by referencing an object's key, this allows us to more
+//      directly reference the functions we use rather than rely on the extra steps of making a new variable
+//      for every function you want to track.
+
+// --------------------------------------------------------------
+
+// So far we've created empty maps and then used 'set()' to populate them, but you can declare and populate
+//      maps at the same time.
+
+const fireStarters=new Map([['Charmander','Kanto'],['Torchic','Hoenn'],['Chimchar','Sinnoh']]);
+
+// You can enter key/value pairs into the map as an array, but keep in mind that array has to be wrapped
+//      inside another array as well, even if there's only one.
+
+const bestStarter=new Map([['Treecko','Hoenn']]);
+
+//      It's also convenient that if you want to add multiple key/value pairs to a map, you can do it in a
+//      single command by chaining set():
+
+fireStarters.set('Cyndaquil','Johto').set('Tepig','Unova').set('Scorbunny','Galar');
+
+// You can also deconstruct a map into an array using the spread operator, which you can see by entering
+//      [...fireStarters]; into the console.
+
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+
+// There are other methods to maps besides set() and get():
+
+// --------------------------------------------------------------
+
+// has():
+//      checks to see if a key is present in a map and returns a boolean.
+
+//      fireStarters.has('Torchic'); === true
+//      fireStarters.has('Mudkip'); === false
+
+// --------------------------------------------------------------
+
+// delete();
+//      checks to see if a key is present in a map. If it is, will return "true" and delete that key. If not,
+//      will return "false".
+
+fireStarters.set('Mudkip','Hoenn').delete('Mudkip','Hoenn');
+
+//      Checking the value of fireStarters will show that Mudkip is not present. If you enter
+//      "fireStarters.delete('Tepig')", it will return true and delete that key/value pair, while if you enter
+//      "fireStarters.delete('Grookey')", it will return "false" and fireStarters will remain unchanged.
+
+// --------------------------------------------------------------
+
+// clear();
+//      deletes all key/value pairs in the map.
+
+// --------------------------------------------------------------
+
+// keys();
+//      returns a map-iterator of all the keys in the map. It's not actually an array, but you can make it one
+//      with the spread operator.
+
+// --------------------------------------------------------------
+
+// values();
+//      same as keys(), but for values.
+
+// ----------------------------------------------------------------------------------------------------------------
