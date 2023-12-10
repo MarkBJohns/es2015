@@ -1212,4 +1212,27 @@ compTeam.add('Eevee');
 // --------------------------------------------------------------
 
 // delete()
-//      removes a specified value from the set
+//      checks to see if a value is present, returns "true" if it is and removes that value, returns "false"
+//      if it is not
+
+// --------------------------------------------------------------
+
+// clear()
+//      deletes all values in the set
+
+// --------------------------------------------------------------
+
+// size()
+//      returns the number of indexes in the set
+
+// --------------------------------------------------------------
+
+// entries()
+//      returns an array for each value: "[value => value]"
+
+// --------------------------------------------------------------
+
+// values() / keys()
+//      if the elements in the sets are objects, returns all the keys or all the values
+
+// --------------------------------------------------------------
