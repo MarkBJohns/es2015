@@ -980,7 +980,8 @@ const numberTwo='one';
 // --------------------------------------------------------------
 
 // Most similar to objects, maps are data structures with key/value pairs, but the keys can be any type of
-//      data, and it's easier to iterate through maps than objects.
+//      data, and it's easier to iterate through maps than objects. Maps, unlike objects, also remain ordered
+//      depending on the order key/value pairs are entered.
 
 const myObj={};
 const key={};
@@ -1101,4 +1102,114 @@ fireStarters.set('Mudkip','Hoenn').delete('Mudkip','Hoenn');
 // values();
 //      same as keys(), but for values.
 
+// --------------------------------------------------------------
+// size();
+//      displays the amount of indexes in the map (replaces 'length').
+
 // ----------------------------------------------------------------------------------------------------------------
+
+//      ITERATING MAPS
+
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+
+
+// In order to iterate through a map, you can use either a for/of loop, or the forEach() method.
+
+function displayMapLoop(map){
+    for(let x of map){
+        console.log(x);
+    }
+}
+
+//      if you enter displayMapLoop(fireStarters) in the console, it will return an array for each key/value
+//      pair in the fireStartes map.
+
+// You can also rewrite the syntax to be "for(let[key,value] of map)" as well.
+
+// --------------------------------------------------------------
+
+// If you want to use the forEach() method instead, you need to specify the key and value as your parameters.
+//      Note that you have to enter the value first.
+
+function displayMapForEach(map){
+    map.forEach((val,key)=>console.log(key,val));
+}
+
+//      In addition to having different parameters, this will return individual values.
+
+// The loop method is generally cleaner, but forEach() is useful if you have a specific callback function
+//      you'd like to run.
+
+// ----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
+
+//      SETS
+
+// --------------------------------------------------------------
+
+// While maps are closer to objects, sets are closer to arrays, as they save values rather than key/value
+//      pairs. One of their main utilities is that they cannot store duplicate values. Think of your PC as an
+//      array of Pokemon. You can add as many duplicates of whatever species you want. The team you build for
+//      a tournament would be a set, as their is a species clause preventing more than one of the same
+//      Pokemon.
+
+const pcBoxOne=['Pikachu','Wurmple','Pikachu','Eevee','Bulbasaur','Pikachu'];
+
+//      As we are Pikachu enjoyers here, our box has three Pikachu in it. But we want to create a team for the
+//      Battle Frontier.
+
+function makeTeam(arr){
+    const compTeam=[];
+    for(const value of arr){
+        if(!compTeam.includes(value)){
+            compTeam.push(value);
+        }
+    }
+    return compTeam;
+}
+
+//      Now we can run our PC Boxes through the makeTeam function to see which Pokemon are eligible, but if
+//      there's an issue with our function, some duplicates can still get through. A better failsafe would be
+//      to make a set that makes duplicates impossible.
+
+const compTeam=new Set(pcBoxOne);
+
+//      Now, without writing any functions or conditionals, we can enter 'compTeam' into the console and
+//      see all of our options with no duplicates.
+
+// --------------------------------------------------------------
+
+// When sets are declared, you can populate them, but only with one parameter.
+
+const letterSet=new Set('hello','world');
+
+//      In the console, letterSet will return {'h','e','l','o'}, as 'world' got ignored completely. It only
+//      iterates through the first parameter, and as you can see there's only one 'l' because sets do not
+//      allow duplicates. Creating compTeam with pcBoxOne worked because pcBoxOne is still only one parameter,
+//      and an iterable one at that.
+
+// --------------------------------------------------------------
+
+// If you do want to add to a set, you can do so with the add() method. But keep in mind that the rules still
+//      apply and any duplicates will be ignored.
+
+compTeam.add('Dustox');
+compTeam.add('Eevee');
+
+//      compTeam will now include Dustox, but it won't include an additional Eevee.
+
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+
+// Sets also have their own set of methods:
+
+// --------------------------------------------------------------
+
+// has()
+//      checks to see if a value is in the set and returns a boolean
+
+// --------------------------------------------------------------
+
+// delete()
+//      removes a specified value from the set
